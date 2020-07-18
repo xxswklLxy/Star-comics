@@ -12,7 +12,7 @@
         <!-- 过度动画组件 -->
         <transition :name=direction>
           <!-- 路由 -->
-         <keep-alive exclude="CartoonDetails,ReadComics">
+         <keep-alive exclude="ReadComics">
             <router-view />
           </keep-alive>
         </transition>
@@ -35,6 +35,12 @@ export default {
       navindex: 0
     };
   },
+  created(){
+
+    
+
+  },
+  
   methods: {
 
     swiperleft() {

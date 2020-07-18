@@ -17,7 +17,7 @@
           slot="append"
           color="#2196f3"
           @click="SearchClick"
-        > 搜索  </v-btn>
+        > 搜索</v-btn>
     </div>
     
       <!-- 漫画模块组件GO -->
@@ -125,11 +125,15 @@ export default {
 .theme--light.v-input input,
 .theme--light.v-input textarea {
   color: rgba(110, 161, 255, 0.87) !important; 
-  background-color:rgba(255, 253, 253, 0.87);
+    background-color: #e8eef3
 }
 .theme--light.v-input{
-  border-radius: 11.111vw;
+  width: 100%;
+height: 15.678vw;
 }
-
+.v-text-field {
+    padding-top: 26px;
+    margin-top: -10px;
+}
 
 </style>

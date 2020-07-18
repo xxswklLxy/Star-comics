@@ -135,7 +135,6 @@ export default {
       this.Cartoonlist();
     },
     pullingUp() {
-      console.log("6546");
     }
   }
 };

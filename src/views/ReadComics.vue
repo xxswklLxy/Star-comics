@@ -5,16 +5,13 @@
     v-title
     data-title="星漫画"
   >
-
     <!-- 没有数据则显示 -->
     <!-- 顶部nav -->
     <div :class="{'topcard': iCard == false ,'topcard1': iCard == true}">
       <div class="topnav">
         <v-icon @click="$router.go(-1)">mdi-chevron-left</v-icon>
         <span class="dataName">{{dataName}}</span>
-
       </div>
-
     </div>
     <!-- 顶部nav -->
     <div
@@ -76,20 +73,24 @@
       <!-- 底部nav -->
       <div :class="{'card': iCard == false ,'card1': iCard == true}">
         <div class="bottomnav">
-          <v-icon @click="bottomnavClick">mdi-text-box-outline</v-icon>
-          <div style=" margin: 0 0 0.556vw 4.556vw; position: absolute; top: 7.611vw;left: -0.778vw; color: white;">目录</div>
-          <v-icon
-            @click="PreviousPage"
-            style="margin:  0 0.556vw 4.556vw; position: absolute; top: -0.389vw;left: 26.778vw; color: white;"
-          >mdi-chevron-left</v-icon>
-
-          <span style="margin: 0 0 0.556vw 4.556vw; position: absolute; top: 7.611vw;left: 23.778vw; color: white;">上一话</span>
-          <v-icon
-            @click="NexPage"
-            style="margin: 0 0 0.556vw 4.556vw; position: absolute; top: -0.389vw;left: 55.778vw; color: white;"
-          >mdi-chevron-right</v-icon>
-          <span style="margin: 0 0 0.556vw 4.556vw; position: absolute; top: 7.611vw;left: 53.778vw; color: white;">下一话</span>
-
+          <div class="btn">
+            <v-icon @click="bottomnavClick">mdi-text-box-outline</v-icon>
+          </div>
+          <div class="btn">
+            <v-icon @click="PreviousPage">mdi-chevron-left</v-icon>
+          </div>
+          <div class="btn">
+            <v-icon @click="NexPage">mdi-chevron-right</v-icon>
+          </div>
+          <div class="btn">
+            <div>目录</div>
+          </div>
+          <div class="btn">
+            <span>上一话</span>
+          </div>
+          <div class="btn">
+            <span>下一话</span>
+          </div>
         </div>
       </div>
       <!-- 底部nav -->
@@ -219,7 +220,6 @@ export default {
       localStorage.setItem("Siid", this.iid);
       this.dataName = this.list.list[this.listindex].num;
       localStorage.setItem("SdataName", this.dataName);
-      console.log(this.list.list[this.listindex].num);
       localStorage.setItem("Slistindex", this.listindex);
       setTimeout(() => {
         this.$refs.scroll.scrollTo(0, 0, 0); //切换章节后跳回顶部
@@ -233,7 +233,6 @@ export default {
       localStorage.setItem("Siid", this.iid);
       this.dataName = this.list.list[this.listindex].num;
       localStorage.setItem("SdataName", this.dataName);
-      console.log(this.list.list[this.listindex].num);
       localStorage.setItem("Slistindex", this.listindex);
       setTimeout(() => {
         this.$refs.scroll.scrollTo(0, 0, 0); //切换章节后跳回顶部
@@ -339,11 +338,7 @@ export default {
       background: url(~assets/img/timg.jpg) no-repeat center;
     }
   }
-  .bottomnav {
-    position: relative;
-    height: 13.889vw;
-    width: 100%;
-  }
+
   .topnav {
     height: 13.889vw;
     width: 100%;
@@ -352,6 +347,17 @@ export default {
   .dataName {
     color: white;
     line-height: 13.889vw;
+  }
+  .bottomnav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    color: white;
+
+    .btn {
+      flex: 0 0 33.33%;
+    }
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="IFundefined">
-        <div class="details-nav">
+      <div class="details-nav">
         <v-icon
           class="icon"
           large
@@ -9,13 +9,15 @@
         >mdi-chevron-left</v-icon>
         <span>{{name}}</span>
       </div>
-       暂无数据
-    <transition name="delay-display-none">
-     
-    <img src="../assets/img/timg.jpg" alt="">     
-    </transition> 
+      暂无数据 可能是网络问题稍等一会
+      <transition name="delay-display-none">
+        <img
+          src="../assets/img/timg.jpg"
+          alt=""
+        >
+      </transition>
     </div>
-    
+
     <div v-else>
       <div class="details-nav">
         <v-icon
@@ -56,18 +58,15 @@
           <!-- 最新更新 -->
           <div class="latest">
 
-            <div> 最新章节:</div>
-            <div class="latest-list">{{latest}}</div>
             <div style=" font-size: 3.889vw;">更新时间：{{time}}</div>
           </div>
           <!-- 章节列表 -->
           <div class="details-list">
             <div class="section">全部章节({{list.length}})</div>
-
             <div class="unfold">
               <div
                 class="text-center ma-2"
-                @click="collectClick"
+                @click="collectClick(cover)"
               >
                 <v-btn
                   color="orange"
@@ -125,7 +124,7 @@ export default {
       iUnfold: false, //升降顺序
       cartoonDetailsRES: [], //保存目录地址
       boos: [],
-      ifname:undefined,
+      ifname: undefined
     };
   },
   created() {
@@ -136,20 +135,29 @@ export default {
     this.CartoonDetails(); // 动态获取ID里的数据
     this.$bus.$emit("DetailsActive", this.$route.fullPath); //用事件总线把当前的路由名称发出去
     this.imageDetail(); //监听图片加载
-  },
-  activated() {},
 
-  destroyed() {
-    //当页面摧毁前用事件总线把false发给HeadTop页面的SActive方法
-    this.$bus.$emit("Detailsnone", false);
+  
   },
+  activated() {
+    
+    this.$bus.$emit("Detailsnone", true);
+  },
+ destroyed(){
+ console.log('111');
+  },
+
+    beforeRouteLeave(to, form, next) {
+       next()
+       this.$bus.$emit("Detailsnone", false);
+  },
+
   computed: {
     // 获取VUEX里的listiid
     listiid() {
       return this.$store.state.listiid;
     },
-    IFundefined(){
-    return this.name == this.ifname
+    IFundefined() {
+      return this.name == this.ifname;
     }
   },
   methods: {
@@ -166,6 +174,7 @@ export default {
         this.introduce = res.data.introduce;
         this.list = res.list.reverse();
         this.code = res.code;
+        this.boos = res.data
       });
     },
     // 点击跳转响应的路由
@@ -197,14 +206,10 @@ export default {
         this.$refs.scroll && this.$refs.scroll.refresh();
       }, 500);
     },
-    collectClick() {
-      // 2.将漫画添加到书架里
-      let boos = {};
-      boos.cover = this.cover;
-      boos.latest = this.latest;
-      boos.name = this.name;
-      boos.url = this.iid;
-      this.$store.commit("bookR", boos);
+    collectClick(cover) {
+      // 2.将漫画添加到书架
+      this.boos.url = this.iid
+      this.$store.commit("bookR", this.boos);
     }
   }
 };
@@ -382,10 +387,10 @@ export default {
     }
   }
   .delay-display-none-leave-active {
-    transition: opacity .3s
-}
-.delay-display-none-leave-to {
-    opacity: 1
-}
+    transition: opacity 0.3s;
+  }
+  .delay-display-none-leave-to {
+    opacity: 1;
+  }
 }
 </style>

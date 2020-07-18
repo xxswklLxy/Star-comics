@@ -34,8 +34,10 @@ export default {
     };
   },
   created(){
+
+   
     this.vanindex();
-     this.navClick(this.navindex);
+    this.navClick(this.navindex);
   },
   mounted() {
     this.Sname = this.$route.name;
@@ -54,7 +56,6 @@ export default {
     });
     // console.log(this.isActive);
   },
-
   methods: {
     iActive(data) {
       if ((data = "/detail")) {
@@ -73,7 +74,8 @@ export default {
     },
     //  将存入浏览器的index的值拿出来重新赋值给navindex 保证刷新后路由和导航下标不会跳回首页
     vanindex() {
-      this.navindex = window.localStorage.getItem("educatList");
+    
+      this.navindex = localStorage.getItem("educatList");
     },
     navClick(index) {
       //  判断进行路由跳转
@@ -91,7 +93,7 @@ export default {
         this.$router.push({ path: "/fiction" }).catch(error => error);
       }
       this.navindex = index;
-       window.localStorage.setItem("educatList", this.navindex); //将index存入浏览器
+      localStorage.setItem("educatList", index); //将index存入浏览器
     }
   }
 };

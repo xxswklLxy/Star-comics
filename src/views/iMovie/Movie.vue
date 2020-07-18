@@ -9,6 +9,12 @@
       ref="scroll"
       :probe-type="3"
     >
+      <div
+        class="tishi"
+        v-show="ibooklist.length < 1"
+      >你还没有添加漫画进书架哦 快去找你喜欢的漫画吧
+       <!-- <div class="dianji" @click="iDianJi">点击寻找漫画</div> -->
+      </div>
       <div class="booklist">
 
         <div
@@ -32,13 +38,13 @@
             <div class="latest">{{item.latest}}</div>
             <div class="Micon">
               <div
-              class="moviebtn"
+                class="moviebtn"
                 @click="ImgClick(item.url)"
                 style="    font-size: 3.889vw; position: absolute;bottom: 0; letf: 0;"
               > 详情</div>
             </div>
             <div
-             class="moviebtn"
+              class="moviebtn"
               @click="engClick(item)"
               style="  font-size: 3.889vw;  position: absolute; bottom: 0;right: 0; "
             > 删除</div>
@@ -52,17 +58,18 @@
 <script>
 import scroll from "@/scroll/scroll";
 export default {
+  name:'Movie',
   components: {
     scroll
   },
   data() {
     return {
-      ibooklist: null
+      ibooklist: 0,
     };
   },
 
   created() {
-    this.ibooklist = JSON.parse(localStorage.getItem("bookList"));
+
   },
   mounted() {
     // 监听轮播图图片加载
@@ -73,24 +80,37 @@ export default {
     });
   },
   activated() {
-    this.ibooklist = JSON.parse(localStorage.getItem("bookList"));
+     
+   this.ibooklist = JSON.parse(localStorage.getItem("bookList"));
     console.log(this.ibooklist);
+
   },
   destroyed() {
     console.log("11");
   },
+  computed: {
+    ibooklists() {
+      return ibooklist.length == 0;
+    }
+  },
   methods: {
     //点击进入详情路由页面
-    ImgClick(iid) {
-      this.$router.push({ name: "detail", params: { iid: iid } }); //动态添加url
+    ImgClick(url) {
+      this.$router.push({ name: "detail", params: { iid: url } }); //动态添加url
+      console.log(url);
     },
     engClick(item) {
       this.ibooklist.removeByValue(item);
       localStorage.setItem("bookList", JSON.stringify(this.ibooklist));
+       // 删除对应事项
+     this.$store.state.bookList = JSON.parse(localStorage.getItem("bookList"))
     },
     MovieLoad() {
       this.$bus.$emit("MovieLoadIMG");
-    }
+    },
+    // iDianJi(){
+    //  this.$router.push({ path: "/cartoon" }).catch(error => error);
+    // }
   }
 };
 </script>
@@ -143,7 +163,24 @@ export default {
     }
   }
 }
-.moviebtn{
+.moviebtn {
   color: orange;
 }
+.tishi{
+  position: relative;
+  top: 100px;
+  text-align: center;
+
+}
+// .dianji{
+//   width: 27.778vw;
+//   height: 27.778vw;
+//   line-height: 27.778vw;
+//   border-radius: 10.333vw;
+//   border: rgb(128, 128, 128) solid 1px;
+//   margin: 13.889vw 0;
+//   position: relative;
+//   left: 50%;
+//   margin-left: -13.889vw;
+// }
 </style>

@@ -37,7 +37,7 @@ export default {
       probeType: this.probeType, // 监听滚动
       pullUpLoad: this.pullUpLoad // 上拉加载
     });
-     console.log(this.scroll);
+    //  console.log(this.scroll);
   
 
      

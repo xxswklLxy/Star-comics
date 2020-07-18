@@ -23,7 +23,6 @@
           :src="item.cover"
           alt=""
           align="center"
-          @click="ImgClick(item.url)"
           @load="HomeLoad"
         >
           <v-card-title v-model="selection">{{item.name}}</v-card-title>
@@ -92,8 +91,8 @@ export default {
   },
   methods: {
     //点击进入详情路由页面
-    ImgClick(iid) {
-      this.$router.push({ name: "detail", params: { iid: iid } }); //动态添加url
+    ImgClick(url) {
+      this.$router.push({ name: "detail", params: { iid: url } }); //动态添加url
     },
     HomeLoad() {
       this.$bus.$emit("HomeLoadIMG");
@@ -122,8 +121,6 @@ export default {
       // 1.获取书架需要收藏的信息
       let book = {};
       book = this.cartoonRes[index];
-      console.log(book);
-
       // 2.将漫画添加到书架里
       this.$store.commit("bookR", book);
     }
