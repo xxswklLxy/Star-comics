@@ -12,7 +12,7 @@
         <!-- 过度动画组件 -->
         <transition :name=direction>
           <!-- 路由 -->
-         <keep-alive exclude="ReadComics">
+         <keep-alive exclude="ReadComics,CartoonDetails">
             <router-view />
           </keep-alive>
         </transition>

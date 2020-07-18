@@ -82,12 +82,9 @@ export default {
   activated() {
      
    this.ibooklist = JSON.parse(localStorage.getItem("bookList"));
-    console.log(this.ibooklist);
 
   },
-  destroyed() {
-    console.log("11");
-  },
+ 
   computed: {
     ibooklists() {
       return ibooklist.length == 0;
@@ -97,7 +94,6 @@ export default {
     //点击进入详情路由页面
     ImgClick(url) {
       this.$router.push({ name: "detail", params: { iid: url } }); //动态添加url
-      console.log(url);
     },
     engClick(item) {
       this.ibooklist.removeByValue(item);

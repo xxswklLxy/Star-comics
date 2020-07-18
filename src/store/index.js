@@ -14,7 +14,6 @@ export default new Vuex.Store({
         bookR(state, book) {
             state.bookList.push_unique(book)
             localStorage.setItem("bookList", JSON.stringify(state.bookList))
-            console.log(state.bookList);
         },
     },
     actions: {

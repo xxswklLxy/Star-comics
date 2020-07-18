@@ -142,9 +142,7 @@ export default {
     
     this.$bus.$emit("Detailsnone", true);
   },
- destroyed(){
- console.log('111');
-  },
+ 
 
     beforeRouteLeave(to, form, next) {
        next()
