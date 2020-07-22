@@ -25,7 +25,7 @@
       暂无数据
       <img
         src="../assets/img/timg.jpg"
-        alt=""
+        alt="../assets/img/timg.jpg"
       >
     </div>
     <!-- 有数据显示 -->

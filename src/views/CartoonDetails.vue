@@ -1,24 +1,6 @@
 <template>
   <div>
-    <div v-if="IFundefined">
-      <div class="details-nav">
-        <v-icon
-          class="icon"
-          large
-          @click="$router.go(-1)"
-        >mdi-chevron-left</v-icon>
-        <span>{{name}}</span>
-      </div>
-      暂无数据 可能是网络问题稍等一会
-      <transition name="delay-display-none">
-        <img
-          src="../assets/img/timg.jpg"
-          alt=""
-        >
-      </transition>
-    </div>
-
-    <div v-else>
+    <div v-if="!IFundefined">
       <div class="details-nav">
         <v-icon
           class="icon"
@@ -82,9 +64,7 @@
                   排序
                 </v-btn>
               </div>
-
             </div>
-
             <div
               v-for="(item,index) in list"
               :key="index"
@@ -95,6 +75,24 @@
         </scroll>
         <router-view></router-view>
       </div>
+    </div>
+
+    <div v-else>
+            <div class="details-nav">
+        <v-icon
+          class="icon"
+          large
+          @click="$router.go(-1)"
+        >mdi-chevron-left</v-icon>
+        <span>{{name}}</span>
+      </div>
+      暂无数据
+      <transition name="delay-display-none">
+        <img
+          src="../assets/img/timg.jpg"
+          alt=""
+        >
+      </transition>
     </div>
   </div>
 </template>
@@ -204,7 +202,7 @@ export default {
         this.$refs.scroll && this.$refs.scroll.refresh();
       }, 500);
     },
-    collectClick(cover) {
+    collectClick() {
       // 2.将漫画添加到书架
       this.boos.url = this.iid
       this.$store.commit("bookR", this.boos);

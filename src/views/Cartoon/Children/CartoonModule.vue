@@ -11,7 +11,7 @@
           <img
             class="vimg"
             :src="item.cover"
-            alt=""
+            alt="../../../assets/img/timg.jpg"
             align="center"
             @click="ImgClick(item.url)"
             @load="ModuleLoad"
